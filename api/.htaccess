@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^book/?$ book.php [NC,L]
+RewriteRule ^author/?$ author.php [NC,L]
+RewriteRule ^written_by/?$ written_by.php [NC,L]
+#RewriteRule
