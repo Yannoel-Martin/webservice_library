@@ -29,15 +29,19 @@ function getBook(int $Code_book=0) {
     global $conn;
     $query = "SELECT * FROM book";
     if ($Code_book !== 0) {
-        $query .= " WHERE id=" . $Code_book;
+        $query .= " WHERE Code_book=" . $Code_book;
     }
     $response = array();
     $result = mysqli_query($conn, $query);
-    while ($row = mysqli_fetch_array($result)) {
-        $response[] = $row;
+    if ($result !== false) {
+        while ($row = mysqli_fetch_array($result)) {
+            $response[] = $row;
+        }
+        header('Content-Type: application/json');
+        echo json_encode($response, JSON_PRETTY_PRINT);
+    } else {
+        echo '<p style="color: red;">Erreur : '.mysqli_error($conn).'</p>';
     }
-    header('Content-Type: application/json');
-    echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
 function addBook() {
